@@ -172,7 +172,6 @@ public class DozerFromTheHitGameGrace : MonoBehaviour
         MonoSingleton<CameraController>.Instance.activated = false;
         MonoSingleton<MusicManager>.Instance.StopMusic();
 
-        yield return new WaitForSeconds(5f);
         while (ralsey.isPlaying)
             yield return null;
 
