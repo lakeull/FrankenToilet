@@ -11,7 +11,6 @@ public static class FishProvider
 {
     private static Dictionary<string, FishObject> fishes = new Dictionary<string, FishObject>();
     private static System.Random rand = new System.Random();
-    private static GameObject defaultPickup = AssetHelper.LoadPrefab("Assets/Prefabs/Fishing/Fish Pickup Template.prefab");
 
     [EntryPoint]
     public static void LoadFishes() 
@@ -67,13 +66,16 @@ public static class FishProvider
         }
         else
         {
+            GameObject defaultPickup = AssetHelper.LoadPrefab("Assets/Prefabs/Fishing/Fish Pickup Template.prefab");
             itemIdentifier = GameObject.Instantiate(defaultPickup).GetComponent<ItemIdentifier>();
             itemIdentifier.gameObject.AddComponent<FishObjectReference>().fishObject = fish;
+
             Transform obj = itemIdentifier.transform.GetChild(0).transform;
             Vector3 localPosition = obj.localPosition;
             Quaternion localRotation = obj.localRotation;
             Vector3 localScale = obj.localScale;
             GameObject.Destroy(obj.gameObject);
+
             GameObject obj2 = fish.InstantiateDumb();
             obj2.transform.SetParent(itemIdentifier.transform);
             obj2.transform.localPosition = localPosition;
